@@ -8,7 +8,7 @@ class ImageBuilder:
     def __init__(
         self, 
         base_output_path: str, 
-        base_asset_path: str,
+        base_input_path: str,
         layers: list[str], 
         base_schema: dict,
         exclusion_table: dict={},
@@ -17,9 +17,9 @@ class ImageBuilder:
         rarity_table: dict={}
     ) -> None:
         self.base_output_path = base_output_path
-        self.base_asset_path = base_asset_path
         self.blueprint_builder = BlueprintBuilder(
             layers, 
+            base_input_path, 
             base_schema,
             exclusion_table=exclusion_table,
             inclusion_table=inclusion_table,
@@ -51,9 +51,8 @@ class ImageBuilder:
             if v.name.lower() == "none":
                 continue
             else:
-                # print(layer.name)
-                path = self.base_asset_path + v.path
-                layers.append(Image.open(path))
+                # print(layer.namez)
+                layers.append(Image.open(v.path))
         if layers == []:
             return
         else:

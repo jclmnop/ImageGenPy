@@ -11,13 +11,15 @@ class BlueprintBuilder:
     def __init__(
         self, 
         layers: list[str], 
+        base_path: str, 
         base_schema: dict={},
         exclusion_table: dict={},
         inclusion_table: dict={},
         sub_traits_z_vals: dict={},
         rarity_table: dict={}
     ) -> None:
-        self.layers = self.__layers__(layers, sub_traits_z_vals, rarity_table)
+        self.base_path = base_path
+        self.layers = self.__layers__(layers, base_path, sub_traits_z_vals, rarity_table)
         self.schema = self.__schema__(base_schema)
         self.exclusion_table = exclusion_table
         self.inclusion_table = inclusion_table
@@ -28,6 +30,7 @@ class BlueprintBuilder:
     def __layers__(
         self, 
         layers: list[str], 
+        base_path: str, 
         sub_traits_z_vals: dict,
         rarity_table: dict
     ) -> list[Layer]:
@@ -35,7 +38,7 @@ class BlueprintBuilder:
             Layer(
                 layers[i], 
                 float(i), 
-                "", 
+                base_path, 
                 sub_trait_z_vals=sub_traits_z_vals,
                 rarity_table=rarity_table
             ) for i in range(len(layers))
