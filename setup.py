@@ -7,7 +7,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setuptools.setup(
     name='ImageGenPy',                           # should match the package folder
     packages=['ImageGenPy'],                     # should match the package folder
-    version='0.0.3',                                # important for updates
+    version='0.0.4',                                # important for updates
     license='MIT',                                  # should match your chosen license
     description='Shitty python package for randomly generating images',
     long_description=long_description,              # loads your README.md
@@ -18,7 +18,7 @@ setuptools.setup(
     project_urls = {                                # Optional
         "Bug Tracker": "https://github.com/jclmnop/ImageGenPy/issues"
     },
-    install_requires=['Pillow', 'pyyaml', 'typing_extensions'],                  # list all packages that your package uses
+    install_requires=['Pillow'],                  # list all packages that your package uses
     keywords=[], #descriptive meta-data
     classifiers=[                                   # https://pypi.org/classifiers
         'Development Status :: 3 - Alpha',
@@ -29,5 +29,5 @@ setuptools.setup(
         'Programming Language :: Python :: 3.9',
     ],
     
-    download_url="https://github.com/jclmnop/ImageGenPy/archive/refs/tags/v0.0.3.tar.gz",
+    download_url="https://github.com/jclmnop/ImageGenPy/archive/refs/tags/v0.0.4.tar.gz",
 )
