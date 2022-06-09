@@ -59,8 +59,8 @@ class ImageBuilder:
             composite = Image.new("RGBA", layers[0].size)
             for layer in layers:
                 composite = Image.alpha_composite(composite, layer)
-            print(f"Saving image: {self.base_output_path}/img/{id}.png")
-            composite.save(f"{self.base_output_path}/img/{id}.png")
+            print(f"Saving image: {self.base_output_path}/{id}.png")
+            composite.save(f"{self.base_output_path}/{id}.png")
 
     def find_layer(
         self, 
