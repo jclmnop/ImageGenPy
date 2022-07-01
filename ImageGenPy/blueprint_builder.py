@@ -56,7 +56,7 @@ class BlueprintBuilder:
         for (k, v) in self.inclusion_table.items():
             layer = self.get_layer(k)
             for trait_name in v.keys():
-                print(trait_name)
+                # print(trait_name)
                 trait = layer.get_trait(trait_name)
                 for layer_name in v[trait_name].keys():
                     included_layer = self.get_layer(layer_name)
@@ -64,7 +64,7 @@ class BlueprintBuilder:
                         included_layer.get_trait(x) 
                         for x in v[trait_name][layer_name]
                     ]
-                    print(included_layer, included_traits)
+                    # print(included_layer, included_traits)
                     for layer_included_trait in included_traits:
                         trait.add_inclusion(layer_included_trait)
 
@@ -72,7 +72,7 @@ class BlueprintBuilder:
         for (k, v) in self.exclusion_table.items():
             layer = self.get_layer(k)
             for trait_name in v.keys():
-                print(trait_name)
+                # print(trait_name)
                 trait = layer.get_trait(trait_name)
                 for layer_name in v[trait_name].keys():
                     excluded_layer = self.get_layer(layer_name)
@@ -80,7 +80,7 @@ class BlueprintBuilder:
                         excluded_layer.get_trait(x) 
                         for x in v[trait_name][layer_name]
                     ]
-                    print(excluded_layer, excluded_traits)
+                    # print(excluded_layer, excluded_traits)
                     for layer_excluded_trait in excluded_traits:
                         trait.add_exclusion(layer_excluded_trait)
 
