@@ -7,7 +7,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setuptools.setup(
     name='ImageGenPy',                           # should match the package folder
     packages=['ImageGenPy'],                     # should match the package folder
-    version='0.0.5',                                # important for updates
+    version='0.0.6',                                # important for updates
     license='MIT',                                  # should match your chosen license
     description='Shitty python package for randomly generating images',
     long_description=long_description,              # loads your README.md
@@ -29,5 +29,5 @@ setuptools.setup(
         'Programming Language :: Python :: 3.9',
     ],
     
-    download_url="https://github.com/jclmnop/ImageGenPy/archive/refs/tags/v0.0.5.tar.gz",
+    download_url="https://github.com/jclmnop/ImageGenPy/archive/refs/tags/v0.0.6.tar.gz",
 )

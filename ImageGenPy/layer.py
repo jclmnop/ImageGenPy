@@ -253,10 +253,10 @@ class Trait:
                 []
             )
             self.inclusions[other_layer].append(other_trait)
-            try:
-                other_trait.inclusions[self.layer].append(self)
-            except KeyError:
-                other_trait.inclusions[self.layer] = [self]
+            # try:
+            #     other_trait.inclusions[self.layer].append(self)
+            # except KeyError:
+            #     other_trait.inclusions[self.layer] = [self]
 
     def add_exclusions(self, other_traits: Traits) -> None:
         for other_trait in other_traits:
