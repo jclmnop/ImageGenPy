@@ -116,7 +116,7 @@ class BlueprintBuilder:
                 )
             }
             attributes.append(attribute)
-        return attributes
+        return self.handle_inclusions(attributes)
 
     def choose_trait(
         self, 
@@ -127,7 +127,7 @@ class BlueprintBuilder:
             x['value'] for x in selected_attributes 
             if isinstance(x['value'], Trait)
         ]
-        traits = self.handle_inclusions(layer, selected_traits)
+        traits = self.get_included_traits(layer, selected_traits)
         weights = [trait.rarity for trait in traits]
         if len(traits) == 0:
             return Trait.none(layer)
@@ -146,7 +146,8 @@ class BlueprintBuilder:
                     if choice == new_choice:
                         attr['value'] = Trait.none(trait.layer)
                     break
-            excluded = False
+            else:
+                excluded = False
         return choice.compose_sub_traits()
 
     def resolve_conflict(self, trait: Trait, other_trait: Trait) -> Trait:
@@ -160,7 +161,7 @@ class BlueprintBuilder:
         print(f"Selected {ret.name}")
         return ret
         
-    def handle_inclusions(
+    def get_included_traits(
         self, 
         layer: Layer, 
         selected_traits: Traits
@@ -188,3 +189,27 @@ class BlueprintBuilder:
                 """
             )
         return inclusions if included else layer.traits
+    
+    def handle_exclusions(self) -> Attributes:
+        pass
+
+    def handle_inclusions(self, selected_attributes: Attributes) -> Attributes:
+        selected_traits: Traits = [
+            x['value'] for x in selected_attributes 
+            if isinstance(x['value'], Trait)
+        ]
+        passed = False
+        while not passed:
+            passed = True
+            for attr in selected_attributes:
+                trait: Trait = attr['value'] if isinstance(
+                    attr['value'], Trait
+                ) else Trait.none(Layer.none())
+                layer: Layer = attr['trait_type'] if isinstance(
+                    attr['trait_type'], Layer
+                ) else Layer.none()
+                while trait not in self.get_included_traits(layer, selected_traits):
+                    passed = False
+                    trait = self.choose_trait(layer, selected_attributes)
+                    attr['value'] = trait
+        return selected_attributes
