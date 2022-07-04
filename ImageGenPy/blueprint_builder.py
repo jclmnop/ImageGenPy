@@ -212,4 +212,8 @@ class BlueprintBuilder:
                     passed = False
                     trait = self.choose_trait(layer, selected_attributes)
                     attr['value'] = trait
+                    selected_traits = [
+                        x['value'] for x in selected_attributes 
+                        if isinstance(x['value'], Trait)
+                    ]
         return selected_attributes
