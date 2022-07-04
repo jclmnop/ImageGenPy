@@ -121,7 +121,8 @@ class BlueprintBuilder:
                 )
             }
             attributes.append(attribute)
-        return self.handle_inclusions(attributes)
+        # return self.handle_inclusions(attributes)
+        return attributes
 
     def choose_trait(
         self, 
@@ -199,6 +200,7 @@ class BlueprintBuilder:
         pass
 
     def handle_inclusions(self, selected_attributes: Attributes) -> Attributes:
+        #TODO: figure out infinite loop
         selected_traits: Traits = [
             x['value'] for x in selected_attributes 
             if isinstance(x['value'], Trait)
