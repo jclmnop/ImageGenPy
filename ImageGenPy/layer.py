@@ -48,9 +48,10 @@ class Layer:
         for name in os.listdir(path):
             if name == '.DS_Store':
                 continue
+            rarity: int = rarity_table.get(self, {}).get(name.split('.')[0], 10_000)
             if "none" in name:
                 traits.append(
-                    Trait.none(self, rarity_table.get(name, 100))
+                    Trait.none(self, rarity)
                 )
             fp = os.path.join(path, name)
             if os.path.isdir(fp):
@@ -60,7 +61,7 @@ class Layer:
                         name, 
                         fp, 
                         self, 
-                        rarity_table.get(name, 100), 
+                        rarity, 
                         [], 
                         sub_traits, 
                         sub_trait_z_vals=self.sub_trait_z_vals
@@ -72,7 +73,7 @@ class Layer:
                         name.split(".")[0], 
                         fp, 
                         self, 
-                        rarity_table.get(name.split(".")[0], 100), 
+                        rarity, 
                         [], 
                         [], 
                         sub_trait_z_vals=self.sub_trait_z_vals
