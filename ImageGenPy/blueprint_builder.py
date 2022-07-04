@@ -208,7 +208,7 @@ class BlueprintBuilder:
                 layer: Layer = attr['trait_type'] if isinstance(
                     attr['trait_type'], Layer
                 ) else Layer.none()
-                while trait not in self.get_included_traits(layer, selected_traits):
+                while trait.get_top_trait() not in self.get_included_traits(layer, selected_traits):
                     passed = False
                     trait = self.choose_trait(layer, selected_attributes)
                     attr['value'] = trait
