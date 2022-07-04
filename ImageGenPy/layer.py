@@ -218,6 +218,17 @@ class Trait:
                 )
                 sub_traits.append(trait)
             return sub_traits
+        
+    def get_top_trait(self) -> Trait:
+        if not self.is_composed_trait():
+            return self
+        else:
+            split_names = self.name.split(':')
+            top_level_name = split_names[0]
+            top_level_trait = self.layer.get_trait(
+                top_level_name
+            )
+            return top_level_trait
 
     def is_composed_trait(self) -> bool:
         return ":" in self.name
