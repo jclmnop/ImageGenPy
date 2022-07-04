@@ -103,6 +103,11 @@ class BlueprintBuilder:
         blueprint['tokenID'] = id
         blueprint['image'] += f"{id}.png"
         blueprint['attributes'] = self.choose_attributes()
+        for attr in blueprint['attributes']:
+            trait: Trait = attr['value'] if isinstance(
+                attr['value'], Trait
+            ) else Trait.none(Layer.none())
+            attr['value'] = trait.compose_sub_traits()
         return Blueprint(blueprint)
 
     def choose_attributes(self) -> Attributes:
@@ -148,7 +153,7 @@ class BlueprintBuilder:
                     break
             else:
                 excluded = False
-        return choice.compose_sub_traits()
+        return choice
 
     def resolve_conflict(self, trait: Trait, other_trait: Trait) -> Trait:
         print(f"[*] Conflict between {trait.name} and {other_trait.name}")
