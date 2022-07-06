@@ -3,6 +3,11 @@ from ImageGenPy.common import *
 import random
 import os
 
+LayerName = str
+TraitName = str
+Rarities = dict[TraitName, int]
+RarityTable = dict[LayerName, Rarities]
+
 class Layer:
     def __init__(
         self, 
@@ -40,7 +45,7 @@ class Layer:
     def __repr__(self) -> str:
         return self.name
 
-    def __traits__(self, path: str, rarity_table: dict) -> Traits:
+    def __traits__(self, path: str, rarity_table: RarityTable) -> Traits:
         #TODO: lookup colour schemes etc???
         traits: Traits = []
         if path == "/none":
@@ -48,7 +53,7 @@ class Layer:
         for name in os.listdir(path):
             if name == '.DS_Store':
                 continue
-            rarity: int = rarity_table.get(self, {}).get(name.split('.')[0], 10_000)
+            rarity: int = rarity_table.get(self.name, {}).get(name.split('.')[0], 10_000)
             if "none" in name:
                 traits.append(
                     Trait.none(self, rarity)
